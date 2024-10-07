@@ -1,6 +1,5 @@
-// screens/AddMenuScreen.tsx
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
@@ -21,6 +20,7 @@ export default function AddMenuScreen({ navigation }: AddMenuScreenProps) {
   };
 
   return (
+    
     <View style={styles.container}>
       <Text style={styles.label}>Dish Name:</Text>
       <TextInput style={styles.input} onChangeText={setDishName} value={dishName} />
@@ -45,6 +45,7 @@ export default function AddMenuScreen({ navigation }: AddMenuScreenProps) {
 
       <Button title="Add Dish" onPress={handleSubmit} />
     </View>
+    
   );
 }
 
@@ -52,15 +53,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#E6E6FA',  
+    justifyContent: 'center',  
   },
   label: {
     fontSize: 18,
     marginVertical: 8,
+    fontFamily: "monospace",
   },
   input: {
     borderWidth: 1,
-    padding: 8,
+    borderColor: '#ccc',
+    padding: 10,
     borderRadius: 5,
-    marginBottom: 10,
-  },
+    marginBottom: 12,
+    backgroundColor: '#fff',
+  }
+ 
 });

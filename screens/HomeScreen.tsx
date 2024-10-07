@@ -29,6 +29,7 @@ export default function HomeScreen({ navigation, route }: HomeScreenProps) {
         <Text style={styles.total}>Total Items: {menuItems.length}</Text>
 
         <FlatList
+      
           data={menuItems}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
@@ -60,14 +61,17 @@ const styles = StyleSheet.create({
   menuItem: {
     borderBottomWidth: 1,
     paddingVertical: 10,
+
+    backgroundColor: '#fff',
+  },
+ 
+  
+  total:{
+    color:'blue'
   },
   backgroundImage: {
     flex: 1,
     width: '100%',
     height: '100%',
   },
-  total:{
-    color:'blue'
-  },
- 
 });
