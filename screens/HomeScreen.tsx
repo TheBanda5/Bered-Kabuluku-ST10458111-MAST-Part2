@@ -54,11 +54,14 @@ export default function HomeScreen({ navigation, route }: HomeScreenProps) {
       
           data={menuItems}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View style={styles.menuItem}>
-              <Text>{item.dishName} - {item.course}</Text>
+                          <Text style={styles.dishName}>{item.dishName} - {item.course}</Text>
+
+              
               <Text>{item.description}</Text>
               <Text>${item.price.toFixed(2)}</Text>
+              <Button title="Remove" color="red" onPress={() => removeItem(index)} />
             </View>
           )}
         />
@@ -74,6 +77,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+  totalItems: {
+    fontSize: 18,
+    marginTop: 10,
+  },
+  averagePrice: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
   title: {
     fontSize: 24,
     marginBottom: 20,
@@ -85,6 +96,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
 
     backgroundColor: '#fff',
+  },
+  dishName: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
  
   
