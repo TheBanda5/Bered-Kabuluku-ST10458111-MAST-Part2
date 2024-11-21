@@ -1,13 +1,34 @@
 // screens/HomeScreen.tsx
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, FlatList, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet, ImageBackground, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation, route }: HomeScreenProps) {
-  const [menuItems, setMenuItems] = useState<{ dishName: string, description: string, course: string, price: number }[]>([]);
+
+
+  const [menuItems, setMenuItems] = useState<{ dishName: string; description: string; course: string; price: number }[]>([]);
+  
+  // Calculate average price
+  const averagePrice = menuItems.length > 0 
+    ? menuItems.reduce((sum, item) => sum + item.price, 0) / menuItems.length 
+    : 0;
+
+  // Handle removal of a menu item
+  const removeItem = (index: number) => {
+    Alert.alert(
+      "Remove Item",
+      "Are you sure you want to remove this item?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "OK", onPress: () => setMenuItems(menuItems.filter((_, i) => i !== index)) }
+      ]
+    );
+  };
+
+
 
   useEffect(() => {
     if (route.params?.newItem) {
@@ -24,9 +45,10 @@ export default function HomeScreen({ navigation, route }: HomeScreenProps) {
       <View style={styles.container}>
         <Text style={styles.title}>Chef's Menu</Text>
         <Button color='black' title="Add Menu" onPress={() => navigation.navigate('AddMenu')} />
-        <Button  color='black' title="Filter Menu" onPress={() => navigation.navigate('FilterMenu')} />
+        <Button title="Filter Menu" onPress={() => navigation.navigate('FilterMenu', { menuItems })} />
 
-        <Text style={styles.total}>Total Items: {menuItems.length}</Text>
+        <Text style={styles.totalItems}>Total Items: {menuItems.length}</Text>
+        <Text style={styles.averagePrice}>Average Price: ${averagePrice.toFixed(2)}</Text>
 
         <FlatList
       
