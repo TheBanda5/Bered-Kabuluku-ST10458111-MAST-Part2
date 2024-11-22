@@ -1,5 +1,4 @@
-// screens/FilterMenuScreen.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
@@ -11,9 +10,9 @@ export default function FilterMenuScreen({ route, navigation }: FilterMenuScreen
   const menuItems = route.params?.menuItems || [];
   const [filteredItems, setFilteredItems] = useState(menuItems);
 
-  // Filter by course type
+  // Filter by course (e.g., 'Appetizer', 'Main', 'Dessert')
   const filterByCourse = (course: string) => {
-    setFilteredItems(menuItems.filter(item => item.course === course));
+    setFilteredItems(menuItems.filter((item) => item.course === course)); // Use 'course' as defined in 'types.ts'
   };
 
   return (
@@ -42,18 +41,16 @@ export default function FilterMenuScreen({ route, navigation }: FilterMenuScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     marginBottom: 20,
   },
   menuItem: {
+    padding: 10,
     borderBottomWidth: 1,
-    paddingVertical: 10,
-    width: '100%',
+    borderBottomColor: '#ccc',
   },
   dishName: {
     fontSize: 16,
