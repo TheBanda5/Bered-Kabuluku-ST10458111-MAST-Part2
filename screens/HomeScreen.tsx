@@ -8,13 +8,13 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export default function HomeScreen({ navigation, route }: HomeScreenProps) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
-  // Calcul du prix moyen
+ 
   const averagePrice =
     menuItems.length > 0
       ? menuItems.reduce((sum, item) => sum + item.price, 0) / menuItems.length
       : 0;
 
-  // Gestion de la suppression d'un plat
+  
   const removeItem = (index: number) => {
     Alert.alert("Remove Item", "Are you sure you want to remove this item?", [
       { text: "Cancel", style: "cancel" },
@@ -28,10 +28,10 @@ export default function HomeScreen({ navigation, route }: HomeScreenProps) {
     ]);
   };
 
-  // Gestion de l'ajout d'un nouvel élément
+  
   useEffect(() => {
     if (route.params?.newItem) {
-      const newItem = route.params.newItem; // TypeScript reconnaît le type automatiquement
+      const newItem = route.params.newItem; 
       setMenuItems((prevItems) => [...prevItems, newItem]);
     }
   }, [route.params?.newItem]);

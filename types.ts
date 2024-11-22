@@ -1,12 +1,12 @@
 export type MenuItem = {
-  dishName: string; // Le nom du plat
-  description: string; // La description du plat
-  course: string; // La catégorie du plat (Entrée, Plat, Dessert)
-  price: number; // Le prix du plat
+  dishName: string; 
+  description: string; 
+  course: string; 
+  price: number; 
 };
 
 export type RootStackParamList = {
-  Home: { newItem?: MenuItem }; // La page Home accepte un paramètre newItem de type MenuItem
+  Home: { newItem?: MenuItem }; 
   AddMenu: undefined;
   FilterMenu: { menuItems: MenuItem[] };
 };
