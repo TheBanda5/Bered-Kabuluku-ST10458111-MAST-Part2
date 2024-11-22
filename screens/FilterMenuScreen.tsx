@@ -5,30 +5,27 @@ import { RootStackParamList } from '../types';
 
 type FilterMenuScreenProps = NativeStackScreenProps<RootStackParamList, 'FilterMenu'>;
 
-export default function FilterMenuScreen({ route, navigation }: FilterMenuScreenProps) {
-  // Extract menuItems from route.params with a default empty array
+export default function FilterMenuScreen({ route }: FilterMenuScreenProps) {
   const menuItems = route.params?.menuItems || [];
   const [filteredItems, setFilteredItems] = useState(menuItems);
 
-  // Filter by course (e.g., 'Appetizer', 'Main', 'Dessert')
   const filterByCourse = (course: string) => {
-    setFilteredItems(menuItems.filter((item) => item.course === course)); // Use 'course' as defined in 'types.ts'
+    setFilteredItems(menuItems.filter((item) => item.course === course));
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Filter Menu</Text>
-      <Button title="Show Appetizers" onPress={() => filterByCourse('Appetizer')} />
-      <Button title="Show Mains" onPress={() => filterByCourse('Main')} />
-      <Button title="Show Desserts" onPress={() => filterByCourse('Dessert')} />
+      <Button title="Show Starters" onPress={() => filterByCourse('Starters')} />
+      <Button title="Show Mains" onPress={() => filterByCourse('Mains')} />
+      <Button title="Show Desserts" onPress={() => filterByCourse('Desserts')} />
       <Button title="Clear Filter" onPress={() => setFilteredItems(menuItems)} />
-
       <FlatList
         data={filteredItems}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.menuItem}>
-            <Text style={styles.dishName}>{item.dishName} - {item.course}</Text>
+            <Text>{item.dishName} - {item.course}</Text>
             <Text>{item.description}</Text>
             <Text>${item.price.toFixed(2)}</Text>
           </View>
@@ -37,6 +34,7 @@ export default function FilterMenuScreen({ route, navigation }: FilterMenuScreen
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -48,12 +46,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   menuItem: {
-    padding: 10,
     borderBottomWidth: 1,
+    paddingVertical: 10,
     borderBottomColor: '#ccc',
-  },
-  dishName: {
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });

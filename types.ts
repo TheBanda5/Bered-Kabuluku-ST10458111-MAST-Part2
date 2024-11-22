@@ -1,14 +1,12 @@
-// Define a shared type for menu items
 export type MenuItem = {
-  dishName: string; // Nom clair pour les plats
-  description: string;
-  course: string; // Catégorie (ex : entrée, plat, dessert)
-  price: number;
+  dishName: string; // Le nom du plat
+  description: string; // La description du plat
+  course: string; // La catégorie du plat (Entrée, Plat, Dessert)
+  price: number; // Le prix du plat
 };
 
-// Define the RootStackParamList
 export type RootStackParamList = {
-  Home: { newItem?: MenuItem }; // newItem est optionnel
-  AddMenu: undefined; // Pas de paramètres pour AddMenu
-  FilterMenu: { menuItems: MenuItem[] }; // Liste des éléments du menu pour FilterMenu
+  Home: { newItem?: MenuItem }; // La page Home accepte un paramètre newItem de type MenuItem
+  AddMenu: undefined;
+  FilterMenu: { menuItems: MenuItem[] };
 };

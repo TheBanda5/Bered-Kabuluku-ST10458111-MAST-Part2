@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet, ImageBackground, Alert, ToastAndroid } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, MenuItem } from '../types'; // Utilisation du type MenuItem
+import { RootStackParamList, MenuItem } from '../types'; // Import des types
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation, route }: HomeScreenProps) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
-  // Calculate average price
+  // Calcul du prix moyen
   const averagePrice =
     menuItems.length > 0
       ? menuItems.reduce((sum, item) => sum + item.price, 0) / menuItems.length
       : 0;
 
-  // Handle removal of a menu item
+  // Gestion de la suppression d'un plat
   const removeItem = (index: number) => {
     Alert.alert("Remove Item", "Are you sure you want to remove this item?", [
       { text: "Cancel", style: "cancel" },
@@ -28,14 +28,11 @@ export default function HomeScreen({ navigation, route }: HomeScreenProps) {
     ]);
   };
 
-  // Handle new item from route params
+  // Gestion de l'ajout d'un nouvel élément
   useEffect(() => {
     if (route.params?.newItem) {
-      // Cast explicite pour que TypeScript comprenne le type
-      const { dishName, description, course, price } = route.params.newItem as MenuItem;
-      if (dishName && description && course && price) {
-        setMenuItems((prevItems) => [...prevItems, route.params.newItem as MenuItem]);
-      }
+      const newItem = route.params.newItem; // TypeScript reconnaît le type automatiquement
+      setMenuItems((prevItems) => [...prevItems, newItem]);
     }
   }, [route.params?.newItem]);
 
